@@ -1,0 +1,36 @@
+*{
+    font-family: Georgia, serif;
+}
+
+.button{
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 2;
+    -fx-background-radius: 0;
+    -fx-background-color: #EEF4ED;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: #13315C;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+.button:hover {
+    -fx-background-color: #8DA9C4;
+}
+
+.button:disabled, .button:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: #1d1d1d;
+    -fx-text-fill: white;
+}
+
+#title {
+    font-size: 27px;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+    color: #000000;
+    font-weight: 700;
+    text-decoration: none;
+    font-style: italic;
+    font-variant: small-caps;
+    text-transform: none;
+    text-shadow: 2px 2px 2px #3539A9;
+}
