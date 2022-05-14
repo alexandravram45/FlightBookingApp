@@ -8,25 +8,25 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: EEF4ED;" stylesheets="@css/home.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.loose.fis.sre.controllers.HomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #eff7ff;" stylesheets="@css/home.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.loose.fis.sre.controllers.HomeController">
    <children>
       <Label id="title" layoutX="160.0" layoutY="162.0" prefHeight="46.0" prefWidth="286.0" stylesheets="@css/home.css" text="Sa inceapa calatoria!">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
-      <Button fx:id="loginButton" layoutX="875.0" layoutY="528.0" mnemonicParsing="false" onAction="#goToLoginPage" prefHeight="57.0" prefWidth="110.0" text="Login" />
+      <Button id="login" fx:id="loginButton" layoutX="875.0" layoutY="528.0" mnemonicParsing="false" onAction="#goToLoginPage" prefHeight="58.0" prefWidth="110.0" text="Login" />
       <Pane layoutX="160.0" layoutY="209.0" prefHeight="221.0" prefWidth="679.0" style="-fx-background-color: #134074;">
          <children>
-            <TextField layoutX="42.0" layoutY="90.0" prefHeight="46.0" prefWidth="140.0" />
+            <TextField fx:id="cityA" layoutX="42.0" layoutY="90.0" prefHeight="46.0" prefWidth="140.0" />
             <Label layoutX="42.0" layoutY="60.0" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Din">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField layoutX="195.0" layoutY="90.0" prefHeight="46.0" prefWidth="140.0">
+            <TextField fx:id="cityB" layoutX="195.0" layoutY="90.0" prefHeight="46.0" prefWidth="140.0">
             </TextField>
-            <Button fx:id="loginButton1" layoutX="600.0" layoutY="174.0" mnemonicParsing="false" onAction="#goToLoginPage" prefHeight="28.0" prefWidth="65.0" text="Cauta" />
+            <Button fx:id="searchButton" layoutX="600.0" layoutY="174.0" mnemonicParsing="false" onAction="#handleSearchingAction" prefHeight="28.0" prefWidth="65.0" text="Cauta" />
             <Label layoutX="195.0" layoutY="60.0" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Catre">
                <font>
                   <Font size="18.0" />
@@ -42,9 +42,10 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <DatePicker layoutX="347.0" layoutY="90.0" prefHeight="46.0" prefWidth="140.0" />
-            <DatePicker layoutX="498.0" layoutY="90.0" prefHeight="46.0" prefWidth="140.0" />
+            <DatePicker fx:id="takeOffDate" layoutX="347.0" layoutY="90.0" prefHeight="46.0" prefWidth="140.0" />
+            <DatePicker fx:id="takeOffBackDate" layoutX="498.0" layoutY="90.0" prefHeight="46.0" prefWidth="140.0" />
          </children>
       </Pane>
+      <Button layoutX="614.0" layoutY="444.0" mnemonicParsing="false" text="Vezi toate zborurile disponibile" />
    </children>
 </AnchorPane>
