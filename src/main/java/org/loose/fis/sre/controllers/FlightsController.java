@@ -56,14 +56,12 @@ public class FlightsController implements Initializable {
         Flight flight;
         try {
             flight = FlightsService.searchFlight(cityA2, cityB2, takeOffDate2, takeOffBackDate2);
-            this.flightId = flight.getFlightId();
             cityA.setText(cityA2);
             cityB.setText(cityB2);
             takeOffDate.setText(takeOffDate2.toString());
             System.out.println(takeOffDate.getText());
             takeOffBackDate.setText(takeOffBackDate2.toString());
             takeOffHour.setText(String.valueOf(flight.getTakeOffHour()));
-            takeOffMinutes.setText(String.valueOf(flight.getTakeOffMinutes()));
             price.setText(String.valueOf(flight.getPrice()));
         }catch (FlightDoesNotExistException e){
             e.getMessage();
@@ -73,8 +71,8 @@ public class FlightsController implements Initializable {
     @FXML
     public void addFlightInterested(){
         try{
-            FlightsService.addFlightToInterested(flightId);
-            interestedText.setText("Zborul a fost adaugat cu succes.");
+            FlightsService.addFlightToInterested(cityA.getText(), cityB.getText());
+            interestedText.setText("The flight has been successfully added!");
         }catch (Exception e){
             System.out.println(e.getMessage());
         }

@@ -7,6 +7,7 @@ import org.dizitart.no2.objects.ObjectRepository;
 import org.jetbrains.annotations.Nullable;
 import org.loose.fis.sre.controllers.FlightsController;
 import org.loose.fis.sre.controllers.HomeController;
+import org.loose.fis.sre.exceptions.FlightAlreadyExistsException;
 import org.loose.fis.sre.exceptions.FlightDoesNotExistException;
 import org.loose.fis.sre.exceptions.UsernameAlreadyExistsException;
 import org.loose.fis.sre.model.Flight;
@@ -47,27 +48,33 @@ public class FlightsService {
         interestedRepository = database.getRepository(Flight.class);
     }
 
-    public static void addFlight(int flightId, String cityA, String cityB, Date takeOffDate, Date takeOffBackDate, int takeOffHour, int takeOffMinutes, int price) {
-        flightRepository.insert(new Flight(flightId, cityA, cityB, takeOffDate, takeOffBackDate, takeOffHour, takeOffMinutes, price));
+    public static void addFlight( String cityA, String cityB, Date takeOffDate, Date takeOffBackDate, int takeOffHour, int price) throws FlightAlreadyExistsException{
+        checkFlightDoesNotAlreadyExist(cityA, cityB);
+        flightRepository.insert(new Flight(cityA, cityB, takeOffDate, takeOffBackDate, takeOffHour, price));
     }
-
-    public static void addFlightToInterested(int flightId){
+    private static void checkFlightDoesNotAlreadyExist(String cityA, String cityB) throws FlightAlreadyExistsException {
         for (Flight flight : flightRepository.find()) {
-            if (Objects.equals(flightId, flight.getFlightId()))
+            if (Objects.equals(cityA, flight.getCityA()) && Objects.equals(cityB, flight.getCityB()))
+                throw new FlightAlreadyExistsException(cityA, cityB);
+        }
+    }
+    public static void addFlightToInterested(String cityA, String cityB){
+        for (Flight flight : flightRepository.find()) {
+            if (Objects.equals(cityA, flight.getCityA()) && Objects.equals(cityB, flight.getCityB()))
                 interestedRepository.insert(flight);
         }
     }
 
-    public static void deleteFlight(int flightId) {
+    public static void deleteFlight(String cityA, String cityB) {
         for (Flight flight : flightRepository.find()) {
-            if (Objects.equals(flightId, flight.getFlightId()))
+            if (Objects.equals(cityA, flight.getCityA()) && Objects.equals(cityB, flight.getCityB()))
                 flightRepository.remove(flight);
         }
     }
 
-    public static void deleteFlightFromInterested(int flightId) {
+    public static void deleteFlightFromInterested(String cityA, String cityB) {
         for (Flight flight : interestedRepository.find()) {
-            if (Objects.equals(flightId, flight.getFlightId()))
+            if (Objects.equals(cityA, flight.getCityA()) && Objects.equals(cityB, flight.getCityB()))
                 interestedRepository.remove(flight);
         }
     }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.loose.fis.sre.controllers.DeleteFlightController">
+   <children>
+      <Label layoutX="113.0" layoutY="105.0" prefHeight="26.0" prefWidth="91.0" text="From:" />
+      <Label layoutX="412.0" layoutY="102.0" prefHeight="32.0" prefWidth="91.0" text="To:" />
+      <Label layoutX="113.0" layoutY="192.0" prefHeight="32.0" prefWidth="111.0" text="Date:" />
+      <Label layoutX="415.0" layoutY="192.0" prefHeight="32.0" prefWidth="85.0" text="Time:" />
+      <ChoiceBox layoutX="106.0" layoutY="144.0" prefHeight="25.0" prefWidth="164.0" />
+      <ChoiceBox layoutX="403.0" layoutY="144.0" prefWidth="150.0" />
+      <Button layoutX="396.0" layoutY="317.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="123.0" text="Delete flight" />
+      <DatePicker layoutX="106.0" layoutY="233.0" />
+      <TextField layoutX="403.0" layoutY="233.0" />
+   </children>
+</AnchorPane>
