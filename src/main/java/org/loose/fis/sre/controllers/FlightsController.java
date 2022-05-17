@@ -9,17 +9,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.loose.fis.sre.exceptions.FlightDoesNotExistException;
 import org.loose.fis.sre.model.Flight;
 import org.loose.fis.sre.services.FlightsService;
-import org.loose.fis.sre.controllers.HomeController;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -40,7 +38,6 @@ public class FlightsController implements Initializable {
         takeOffDate.setText(" ");
         takeOffBackDate.setText(" ");
         takeOffHour.setText(" ");
-        takeOffMinutes.setText(" ");
         price.setText(" ");
     }
 
@@ -51,17 +48,16 @@ public class FlightsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
     }
 
-    public void handleSearch(String cityA2, String cityB2, LocalDate takeOffDate2, LocalDate takeOffBackDate2){
+    public void handleSearch(String cityA2, String cityB2, LocalDate takeOffDate2){
         System.out.println(cityB2);
         Flight flight;
         try {
-            flight = FlightsService.searchFlight(cityA2, cityB2, takeOffDate2, takeOffBackDate2);
+            flight = FlightsService.searchFlight(cityA2, cityB2, Date.valueOf(takeOffDate2));
             cityA.setText(cityA2);
             cityB.setText(cityB2);
             takeOffDate.setText(takeOffDate2.toString());
             System.out.println(takeOffDate.getText());
-            takeOffBackDate.setText(takeOffBackDate2.toString());
-            takeOffHour.setText(String.valueOf(flight.getTakeOffHour()));
+            takeOffHour.setText(String.valueOf(flight.getFlightTime()));
             price.setText(String.valueOf(flight.getPrice()));
         }catch (FlightDoesNotExistException e){
             e.getMessage();
