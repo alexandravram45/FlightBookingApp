@@ -26,7 +26,7 @@
             </Label>
             <TextField fx:id="cityB" layoutX="195.0" layoutY="90.0" prefHeight="46.0" prefWidth="140.0">
             </TextField>
-            <Button fx:id="searchButton" layoutX="567.0" layoutY="97.0" mnemonicParsing="false" onAction="#handleSearchingAction" prefHeight="28.0" prefWidth="65.0" text="Cauta" />
+            <Button fx:id="searchButton" layoutX="553.0" layoutY="97.0" mnemonicParsing="false" onAction="#handleSearchingAction" prefHeight="28.0" prefWidth="65.0" text="Cauta" />
             <Label layoutX="195.0" layoutY="60.0" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Catre">
                <font>
                   <Font size="18.0" />
