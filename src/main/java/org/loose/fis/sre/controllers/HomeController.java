@@ -26,7 +26,7 @@ public class HomeController implements Initializable {
     @FXML
     private TextField cityA, cityB;
     @FXML
-    private DatePicker takeOffDate;
+    private TextField takeOffDate;
     @FXML
     private Button searchButton;
 
@@ -53,12 +53,22 @@ public class HomeController implements Initializable {
     }
 
     @FXML
-    public void handleSearchingAction() throws Exception {
+    public void handleSearchingAction(ActionEvent event) throws Exception {
         searchButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 Parent root;
                 try {
-                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("flight.fxml")));
+                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("flight.fxml"));
+                    root = loader.load();
+
+                    FlightsController flightsController = loader.getController();
+
+                    try{
+                        flightsController.handleSearch(cityA.getText(), cityB.getText(), takeOffDate.getText());
+                    }catch (NullPointerException e){
+                        System.out.println(e.getMessage());
+                    }
+
                     Stage stage = new Stage();
                     stage.setTitle("Flight");
                     stage.setScene(new Scene(root, 1000, 600));
@@ -69,10 +79,10 @@ public class HomeController implements Initializable {
 
             }
         });
-            FlightsController c = new FlightsController();
-            c.handleSearch(cityA.getText(), cityB.getText(), takeOffDate.getValue());
-            //cityA_static.setText(cityA.getText());
-            System.out.println(cityA.getText());
+    }
+
+    @FXML
+    public void seeAllFlights(){
 
     }
 

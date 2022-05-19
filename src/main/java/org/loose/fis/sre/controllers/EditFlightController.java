@@ -18,7 +18,7 @@ public class EditFlightController {
 
     @FXML
 
-    private DatePicker oldDate, newDate;
+    private TextField oldDate, newDate; //am schimbat aici in texfield, schimba si in fxml
 
     @FXML
 
@@ -31,7 +31,7 @@ public class EditFlightController {
 
     public void editFlightButton() {
         try {
-            FlightsService.editFlight(cityA.getText(), cityB.getText(), valueOf(oldDate.getValue()), valueOf(newDate.getValue()), oldTime.getText(), newTime.getText());
+            FlightsService.editFlight(cityA.getText(), cityB.getText(), oldDate.getText(), newDate.getText(), Integer.parseInt(oldTime.getText()), Integer.parseInt(newTime.getText()));
         } catch (FlightDoesNotExistException e)
         {
             addingMessage.setText(e.getMessage());

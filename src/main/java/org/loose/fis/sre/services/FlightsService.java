@@ -41,9 +41,9 @@ public class FlightsService {
         interestedRepository = database.getRepository(Flight.class);
     }
 
-    public static void addFlight( String cityA, String cityB, Date takeOffDate, Date takeOffBackDate, int takeOffHour, int price) throws FlightAlreadyExistsException{
+    public static void addFlight(String cityA, String cityB, String takeOffDate, int takeOffHour, int price) throws FlightAlreadyExistsException{
         checkFlightDoesNotAlreadyExist(cityA, cityB);
-        flightRepository.insert(new Flight(cityA, cityB, takeOffDate, takeOffBackDate, takeOffHour, price));
+        flightRepository.insert(new Flight(cityA, cityB, takeOffDate, takeOffHour, price));
     }
     private static void checkFlightDoesNotAlreadyExist(String cityA, String cityB) throws FlightAlreadyExistsException {
         for (Flight flight : flightRepository.find()) {
@@ -73,30 +73,28 @@ public class FlightsService {
         }
     }
 
-     public static void editFlight(String cityA, String cityB, Date oldDate, Date newDate, String oldTime, String newTime) throws FlightDoesNotExistException {
+     public static void editFlight(String cityA, String cityB, String oldDate, String newDate, int oldTime, int newTime) throws FlightDoesNotExistException {
          for (Flight flight : flightRepository.find()) {
              if (Objects.equals(cityA, flight.getCityA()) && Objects.equals(cityB, flight.getCityB())){
                  flightRepository.remove(flight);
-                 Flight newFlight = new Flight(cityA, cityB, newDate,flight.getTakeOffBackDate(), Integer.parseInt(newTime), flight.getPrice());
+                 Flight newFlight = new Flight(cityA, cityB, newDate, newTime, flight.getPrice());
                  flightRepository.insert(newFlight);
              }
              throw new FlightDoesNotExistException(cityA, cityB, flight.getFlightDate());
          }
      }
 
-    @Nullable
-    public static Flight searchFlight(String cityA, String cityB, Date flightDate) throws FlightDoesNotExistException {
-        int ok = 0;
+    public static Flight searchFlight(String cityA, String cityB, String flightDate) throws FlightDoesNotExistException {
         for (Flight flight : flightRepository.find()) {
+            System.out.println(flightDate);
+            System.out.println(flight.getFlightDate());
+            System.out.println(flight.getCityA());
+            System.out.println(flight.getCityB());
             if (Objects.equals(cityA, flight.getCityA()) && Objects.equals(cityB, flight.getCityB()) && Objects.equals(flightDate, flight.getFlightDate())) {
-                ok = 1;
                 return flight;
             }
         }
-        if (ok == 0) {
-            throw new FlightDoesNotExistException(cityA, cityB, flightDate);
-        }
-        return null;
+        throw new FlightDoesNotExistException(cityA, cityB, flightDate);
     }
 }
 

@@ -30,21 +30,18 @@ import java.util.ResourceBundle;
 
 public class FlightsController implements Initializable {
     @FXML
-    private Label cityA, cityB, takeOffDate, takeOffBackDate, takeOffHour, takeOffMinutes, price;
+    private Label cityA, cityB, takeOffDate, takeOffHour, price;
     @FXML
     private Text interestedText;
     @FXML
     private Button bookButton;
-    private int flightId;
 
     @FXML
     public void initialize() {
         cityA.setText(" ");
         cityB.setText(" ");
         takeOffDate.setText(" ");
-        takeOffBackDate.setText(" ");
         takeOffHour.setText(" ");
-        takeOffMinutes.setText(" ");
         price.setText(" ");
     }
 
@@ -55,21 +52,14 @@ public class FlightsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
     }
 
-    public void handleSearch(String cityA2, String cityB2, LocalDate takeOffDate2){
+    public void handleSearch(String cityA2, String cityB2, String takeOffDate2){
         Flight flight;
         try {
-            Calendar date1 = Calendar.getInstance();
-            date1.set(takeOffDate2.getYear(), takeOffDate2.getMonthValue(), takeOffDate2.getDayOfMonth());
-
             flight = FlightsService.searchFlight(cityA2, cityB2, takeOffDate2);
-
-            Calendar c = Calendar.getInstance();
-            c.setTime(flight.getTakeOffDate());
-
             cityA.setText(cityA2);
             cityB.setText(cityB2);
-            takeOffDate.setText("" + c.get(Calendar.DAY_OF_MONTH) + "/" + c.get(Calendar.MONTH)  + "/" + (c.get(Calendar.YEAR) - 1900));
-            takeOffHour.setText(String.valueOf(flight.getTakeOffHour()));
+            takeOffDate.setText(flight.getFlightDate());
+            takeOffHour.setText(String.valueOf(flight.getFlightTime()));
             price.setText("" + flight.getPrice() + "\u20ac");
         }catch (FlightDoesNotExistException e){
             interestedText.setText(e.getMessage());
@@ -88,12 +78,20 @@ public class FlightsController implements Initializable {
 
     @FXML
     public void bookThisFlight() throws Exception {
-
         bookButton.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
             public void handle(ActionEvent event) {
+
                 Parent root;
+                String s = price.getText();
+
+                int priceValue = Integer.parseInt(s.replaceAll("[^0-9]", ""));
                 try {
-                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("booking.fxml")));
+                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("booking.fxml"));
+                    root = loader.load();
+
+                    BookingController bookingController = loader.getController();
+                    bookingController.setBookingDetails(cityA.getText(), cityB.getText(), takeOffDate.getText(), Integer.parseInt(takeOffHour.getText()), priceValue);
+
                     Stage stage = new Stage();
                     stage.setTitle("Booking");
                     stage.setScene(new Scene(root, 500, 700));
