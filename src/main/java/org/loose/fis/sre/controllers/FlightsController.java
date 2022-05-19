@@ -9,16 +9,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.loose.fis.sre.exceptions.FlightDoesNotExistException;
 import org.loose.fis.sre.model.Flight;
 import org.loose.fis.sre.services.FlightsService;
+import org.loose.fis.sre.controllers.HomeController;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -38,6 +44,7 @@ public class FlightsController implements Initializable {
         takeOffDate.setText(" ");
         takeOffBackDate.setText(" ");
         takeOffHour.setText(" ");
+        takeOffMinutes.setText(" ");
         price.setText(" ");
     }
 
@@ -49,18 +56,23 @@ public class FlightsController implements Initializable {
     }
 
     public void handleSearch(String cityA2, String cityB2, LocalDate takeOffDate2){
-        System.out.println(cityB2);
         Flight flight;
         try {
-            flight = FlightsService.searchFlight(cityA2, cityB2, Date.valueOf(takeOffDate2));
+            Calendar date1 = Calendar.getInstance();
+            date1.set(takeOffDate2.getYear(), takeOffDate2.getMonthValue(), takeOffDate2.getDayOfMonth());
+
+            flight = FlightsService.searchFlight(cityA2, cityB2, takeOffDate2);
+
+            Calendar c = Calendar.getInstance();
+            c.setTime(flight.getTakeOffDate());
+
             cityA.setText(cityA2);
             cityB.setText(cityB2);
-            takeOffDate.setText(takeOffDate2.toString());
-            System.out.println(takeOffDate.getText());
-            takeOffHour.setText(String.valueOf(flight.getFlightTime()));
-            price.setText(String.valueOf(flight.getPrice()));
+            takeOffDate.setText("" + c.get(Calendar.DAY_OF_MONTH) + "/" + c.get(Calendar.MONTH)  + "/" + (c.get(Calendar.YEAR) - 1900));
+            takeOffHour.setText(String.valueOf(flight.getTakeOffHour()));
+            price.setText("" + flight.getPrice() + "\u20ac");
         }catch (FlightDoesNotExistException e){
-            e.getMessage();
+            interestedText.setText(e.getMessage());
         }
     }
 
@@ -84,7 +96,7 @@ public class FlightsController implements Initializable {
                     root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("booking.fxml")));
                     Stage stage = new Stage();
                     stage.setTitle("Booking");
-                    stage.setScene(new Scene(root, 500, 800));
+                    stage.setScene(new Scene(root, 500, 700));
                     stage.show();
                 }
                 catch (IOException e) {

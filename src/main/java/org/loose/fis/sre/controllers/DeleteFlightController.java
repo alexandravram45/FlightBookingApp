@@ -17,7 +17,7 @@ public class DeleteFlightController {
 
     @FXML
 
-    private DatePicker flightDate;
+    private String flightDate;
 
     @FXML
 

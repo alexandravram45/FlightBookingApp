@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.loose.fis.sre.exceptions.FlightAlreadyExistsException;
+import org.loose.fis.sre.model.Flight;
 import org.loose.fis.sre.services.BookingService;
 import org.loose.fis.sre.services.FileSystemService;
 import org.loose.fis.sre.services.FlightsService;
@@ -13,8 +14,6 @@ import org.loose.fis.sre.services.UserService;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.sql.Date;
-
 public class Main extends Application {
 
     @Override
@@ -25,7 +24,7 @@ public class Main extends Application {
         FlightsService.initDatabaseInterested();
         BookingService.initDatabase();
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("home.fxml"));
-        primaryStage.setTitle("Registration Example");
+        primaryStage.setTitle("Flight Booking App");
         primaryStage.setScene(new Scene(root, 1000, 600));
         primaryStage.show();
     }
@@ -40,7 +39,8 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
         try {
-            FlightsService.addFlight("Romania", "Spania", new Date(2021, 12, 12), new Date(2022, 12, 12), 18, 320);
+            FlightsService.addFlight("Romania", "Italia", "06/04/2022" ,18, 320);
+            FlightsService.addFlight("Romania", "Spania", "12/12/2022", 18, 320);
         }
         catch (FlightAlreadyExistsException e){
             System.out.println(e.getMessage());

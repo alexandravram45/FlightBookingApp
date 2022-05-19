@@ -22,10 +22,10 @@ public class BookingService {
         bookingRepository = database.getRepository(Booking.class);
     }
 
-    public static void addBooking(String firstName, String lastName, String tel, String address, String email) throws WrongPhoneNumberFormatException, WrongEmailFormatException{
+    public static void addBooking(String firstName, String lastName, String tel, String address, String email, String cityA, String cityB, String flightDate, int flightHour, int price) throws WrongPhoneNumberFormatException, WrongEmailFormatException{
         checkEmailFormat(email);
         checkTelFormat(tel);
-        bookingRepository.insert(new Booking(firstName, lastName, tel, address, email));
+        bookingRepository.insert(new Booking(firstName, lastName, tel, address, email, cityA, cityB, flightDate, flightHour, price));
     }
 
     private static void checkTelFormat(String tel) throws WrongPhoneNumberFormatException{
