@@ -14,9 +14,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.loose.fis.sre.exceptions.NotAnAdminException;
 import org.loose.fis.sre.exceptions.UsernameAlreadyExistsException;
+import org.loose.fis.sre.model.whoIsLoggedIn;
 import org.loose.fis.sre.services.UserService;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class RegistrationController {
 
@@ -28,6 +30,7 @@ public class RegistrationController {
     private TextField usernameField;
     @FXML
     private ChoiceBox role;
+    private String userRole;
 
     @FXML
     public void initialize() {
@@ -35,10 +38,36 @@ public class RegistrationController {
     }
 
     @FXML
-    public void handleRegisterAction() {
+    public void handleRegisterAction(ActionEvent event) {
         try {
             UserService.addUser(usernameField.getText(), passwordField.getText(), (String) role.getValue());
             registrationMessage.setText("Account created successfully!");
+            userRole = (String) role.getValue();
+            if (userRole.equals("Admin")){
+                whoIsLoggedIn.setLoggedUsername(usernameField.getText());
+                Parent root;
+                try {
+                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("adminChoices.fxml")));
+                    Stage stage = new Stage();
+                    stage.setTitle("Choose options");
+                    stage.setScene(new Scene(root, 600, 400));
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }else if (userRole.equals("Customer")){
+                whoIsLoggedIn.setLoggedUsername(usernameField.getText());
+                Parent root;
+                try {
+                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("home.fxml")));
+                    Stage stage = new Stage();
+                    stage.setTitle("Home page");
+                    stage.setScene(new Scene(root, 1000, 600));
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         } catch (UsernameAlreadyExistsException e) {
             registrationMessage.setText(e.getMessage());
         } catch (NotAnAdminException e){

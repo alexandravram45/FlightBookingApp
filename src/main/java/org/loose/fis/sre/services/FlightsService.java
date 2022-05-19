@@ -73,6 +73,17 @@ public class FlightsService {
         }
     }
 
+     public static void editFlight(String cityA, String cityB, Date oldDate, Date newDate, String oldTime, String newTime) throws FlightDoesNotExistException {
+         for (Flight flight : flightRepository.find()) {
+             if (Objects.equals(cityA, flight.getCityA()) && Objects.equals(cityB, flight.getCityB())){
+                 flightRepository.remove(flight);
+                 Flight newFlight = new Flight(cityA, cityB, newDate,flight.getTakeOffBackDate(), Integer.parseInt(newTime), flight.getPrice());
+                 flightRepository.insert(newFlight);
+             }
+             throw new FlightDoesNotExistException(cityA, cityB, flight.getFlightDate());
+         }
+     }
+
     @Nullable
     public static Flight searchFlight(String cityA, String cityB, Date flightDate) throws FlightDoesNotExistException {
         int ok = 0;

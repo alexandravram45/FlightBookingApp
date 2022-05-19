@@ -19,7 +19,7 @@
       <TextField fx:id="flightTime" layoutX="403.0" layoutY="233.0" />
       <TextField fx:id="cityA" layoutX="101.0" layoutY="144.0" prefHeight="25.0" prefWidth="174.0" />
       <TextField fx:id="cityB" layoutX="403.0" layoutY="144.0" prefHeight="26.0" prefWidth="164.0" />
-      <Text fx:id="text" layoutX="213.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="174.0">
+      <Text fx:id="deleteMessage" layoutX="213.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="174.0">
          <font>
             <Font size="18.0" />
          </font>

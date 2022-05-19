@@ -34,6 +34,14 @@ public class AddFlightController {
     private Text addingMessage;
 
     @FXML
+
+
+
+
+
+
+
+
     public void addFlightButton() {
         try {
             FlightsService.addFlight(cityA.getText(), cityB.getText(), takeOffDate.getText(), Integer.parseInt(price.getText()), Integer.parseInt(time.getText()));
