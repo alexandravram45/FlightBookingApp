@@ -25,7 +25,7 @@ public class ChoicesController {
 
     @FXML
 
-    public void goToAddFlightPage () throws Exception {
+    public void addFlightButton () throws Exception {
 
         addFlight.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -46,7 +46,7 @@ public class ChoicesController {
 
     @FXML
 
-    public void goToDeleteFlightPage () throws Exception {
+    public void deleteFlightButton () throws Exception {
 
         deleteFlight.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -67,7 +67,7 @@ public class ChoicesController {
 
     @FXML
 
-    public void goToEditFlightPage () throws Exception {
+    public void editFlightButton () throws Exception {
 
         editFlight.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
