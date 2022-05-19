@@ -4,6 +4,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
+import org.loose.fis.sre.exceptions.FlightDoesNotExistException;
+import org.loose.fis.sre.services.FlightsService;
+
+import static java.sql.Date.valueOf;
 
 public class EditFlightController {
 
@@ -19,10 +24,18 @@ public class EditFlightController {
 
     private Button editFlight;
 
-     @FXML
+    @FXML
 
-    public void editFlightButton () {
+    private Text addingMessage;
+    @FXML
 
+    public void editFlightButton() {
+        try {
+            FlightsService.editFlight(cityA.getText(), cityB.getText(), valueOf(oldDate.getValue()), valueOf(newDate.getValue()), oldTime.getText(), newTime.getText());
+        } catch (FlightDoesNotExistException e)
+        {
+            addingMessage.setText(e.getMessage());
+        }
     }
 
 }
