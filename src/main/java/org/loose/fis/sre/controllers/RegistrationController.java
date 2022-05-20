@@ -34,8 +34,6 @@ public class RegistrationController {
     @FXML
     private TextField emailField;
     @FXML
-    private TextField numberField;
-    @FXML
     private ChoiceBox role;
     private String userRole;
 
@@ -47,16 +45,13 @@ public class RegistrationController {
     @FXML
     public void handleRegisterAction(ActionEvent event) {
         try {
-            UserService.addUser(usernameField.getText(), passwordField.getText(), (String) role.getValue(), nameField.getText(), emailField.getText(), numberField.getText());
+            UserService.addUser(usernameField.getText(), passwordField.getText(), (String) role.getValue(), nameField.getText(), emailField.getText());
             registrationMessage.setText("Account created successfully!");
             userRole = (String) role.getValue();
-
         } catch (UsernameAlreadyExistsException e1) {
             registrationMessage.setText(e1.getMessage());
-        } catch (invalidAdminEmailException e2) {
+        } catch (NotAnAdminException e2) {
             registrationMessage.setText(e2.getMessage());
-        } catch (invalidCustomerEmailException e3) {
-            registrationMessage.setText(e3.getMessage());
         }
 
     }

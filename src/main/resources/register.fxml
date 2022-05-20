@@ -22,25 +22,23 @@
 
     <TextField fx:id="nameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-    <Label text="Password:" GridPane.rowIndex="5" />
+    <Label text="Password:" GridPane.rowIndex="4" />
 
-    <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+    <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
-    <Label text="Role:" GridPane.rowIndex="6" />
+    <Label text="Role:" GridPane.rowIndex="5" />
 
-    <ChoiceBox fx:id="role" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+    <ChoiceBox fx:id="role" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
     </ChoiceBox>
 
     <Text fx:id="registrationMessage" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-    <HBox alignment="bottom_right" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="8">
+    <HBox alignment="bottom_right" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="7">
         <Button onAction="#handleRegisterAction" text="Register" />
     </HBox>
    <Label layoutX="199.0" layoutY="95.0" text="Username:" GridPane.rowIndex="2" />
    <Label layoutX="199.0" layoutY="95.0" text="Email:" GridPane.rowIndex="3" />
    <TextField fx:id="usernameField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
    <TextField fx:id="emailFiled" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-   <Label layoutX="197.0" layoutY="152.0" text="Phone number:" GridPane.rowIndex="4" />
-   <TextField fx:id="numberField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints />
@@ -51,9 +49,9 @@
       <RowConstraints />
       <RowConstraints minHeight="10.0" prefHeight="30.0" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints />
+      <RowConstraints />
       <RowConstraints minHeight="10.0" prefHeight="30.0" />
-      <RowConstraints />
-      <RowConstraints />
       <RowConstraints />
       <RowConstraints />
       <RowConstraints />

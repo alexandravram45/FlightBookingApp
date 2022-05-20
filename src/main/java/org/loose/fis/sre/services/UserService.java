@@ -25,7 +25,7 @@ public class UserService {
         userRepository = database.getRepository(User.class);
     }
 
-    public static void addUser(String username, String password, String role, String name, String email, String phoneNumber) throws UsernameAlreadyExistsException, NotAnAdminException, invalidAdminEmailException, invalidCustomerEmailException {
+    public static void addUser(String username, String password, String role, String name, String email) throws UsernameAlreadyExistsException, NotAnAdminException {
         checkUserDoesNotAlreadyExist(username);
         checkUserIsNotAnAdmin(username, role);
         userRepository.insert(new User(username, encodePassword(username, password), role));
