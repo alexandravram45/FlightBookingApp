@@ -2,12 +2,11 @@ package org.loose.fis.sre.services;
 
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.objects.ObjectRepository;
-import org.jetbrains.annotations.Nullable;
 import org.loose.fis.sre.exceptions.FlightAlreadyExistsException;
 import org.loose.fis.sre.exceptions.FlightDoesNotExistException;
 import org.loose.fis.sre.model.Flight;
 
-import java.sql.Date;
+import javafx.scene.control.TableView;
 import java.util.Objects;
 
 import static org.loose.fis.sre.services.FileSystemService.getPathToFile;
@@ -96,5 +95,25 @@ public class FlightsService {
         }
         throw new FlightDoesNotExistException(cityA, cityB, flightDate);
     }
+
+    private static int flightNumber = 0;
+    public static Flight returnFlight(int i)  {
+        flightNumber = 0;
+        for (Flight flight : flightRepository.find()) {
+            flightNumber++;
+            if (i == flightNumber)
+                return flight;
+        }
+        return null;
+    }
+
+    public static int getFlightsNumber(){
+        int flightsNumber = 0;
+        for (Flight flight : flightRepository.find()) {
+            flightsNumber ++;
+        }
+        return flightsNumber;
+    }
+
 }
 

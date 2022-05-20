@@ -103,7 +103,6 @@ public class FlightsController implements Initializable {
             }
         });
     }
-
     public void showReviews(ActionEvent event) {
     }
 }

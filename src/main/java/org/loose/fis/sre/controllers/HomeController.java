@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.loose.fis.sre.services.FlightsService;
 
 
 import java.io.IOException;
@@ -22,7 +23,7 @@ import java.util.ResourceBundle;
 public class HomeController implements Initializable {
 
     @FXML
-    private Button loginButton;
+    private Button loginButton, seeAllFlightsButton;
     @FXML
     private TextField cityA, cityB;
     @FXML
@@ -82,8 +83,26 @@ public class HomeController implements Initializable {
     }
 
     @FXML
-    public void seeAllFlights(){
+    public void seeAllFlights(ActionEvent event) throws Exception {
+        seeAllFlightsButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                Parent root;
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("flightsList.fxml"));
+                try {
+                    root = loader.load();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
 
+                SeeAllFlightsController seeAllFlightsController = loader.getController();
+                seeAllFlightsController.seeAllFlights();
+
+                Stage stage = new Stage();
+                stage.setTitle("All flights available");
+                stage.setScene(new Scene(root, 1000, 600));
+                stage.show();
+            }
+        });
     }
 
     @Override
