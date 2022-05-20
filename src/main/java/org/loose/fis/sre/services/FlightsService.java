@@ -4,6 +4,7 @@ import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.objects.ObjectRepository;
 import org.loose.fis.sre.exceptions.FlightAlreadyExistsException;
 import org.loose.fis.sre.exceptions.FlightDoesNotExistException;
+import org.loose.fis.sre.exceptions.NoFlightsAvailable;
 import org.loose.fis.sre.model.Flight;
 
 import javafx.scene.control.TableView;
@@ -97,7 +98,7 @@ public class FlightsService {
     }
 
     private static int flightNumber = 0;
-    public static Flight returnFlight(int i)  {
+    public static Flight returnFlight(int i){
         flightNumber = 0;
         for (Flight flight : flightRepository.find()) {
             flightNumber++;
@@ -107,10 +108,35 @@ public class FlightsService {
         return null;
     }
 
-    public static int getFlightsNumber(){
+
+    private static int interestedFlightNumber = 0;
+    public static Flight returnInterestedFlight(int i)  {
+        interestedFlightNumber = 0;
+        for (Flight flight : interestedRepository.find()) {
+            interestedFlightNumber++;
+            if (i == interestedFlightNumber)
+                return flight;
+        }
+        return null;
+    }
+    public static int getFlightsNumber() throws NoFlightsAvailable{
         int flightsNumber = 0;
         for (Flight flight : flightRepository.find()) {
             flightsNumber ++;
+        }
+        if (flightsNumber == 0){
+            throw new NoFlightsAvailable();
+        }
+        return flightsNumber;
+    }
+
+    public static int getInterestedFlightsNumber() throws NoFlightsAvailable{
+        int flightsNumber = 0;
+        for (Flight flight : interestedRepository.find()) {
+            flightsNumber ++;
+        }
+        if (flightsNumber == 0){
+            throw new NoFlightsAvailable();
         }
         return flightsNumber;
     }

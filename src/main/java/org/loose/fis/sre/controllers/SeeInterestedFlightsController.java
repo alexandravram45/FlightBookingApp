@@ -3,18 +3,15 @@ package org.loose.fis.sre.controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import org.loose.fis.sre.exceptions.NoFlightsAvailable;
 import org.loose.fis.sre.model.Flight;
 import org.loose.fis.sre.services.FlightsService;
 
-import javafx.scene.control.TableView;
-import javafx.scene.control.TableColumn;
-
-public class SeeAllFlightsController{
+public class SeeInterestedFlightsController {
     @FXML
     private Text errorMessage;
     @FXML
@@ -31,22 +28,22 @@ public class SeeAllFlightsController{
     @FXML
     public TableColumn<Flight, Integer> flightHourColumn;
 
-    public ObservableList<Flight> observableList = FXCollections.observableArrayList();
+    public ObservableList<Flight> observableListInterested = FXCollections.observableArrayList();
 
-    public void seeAllFlights() throws NoFlightsAvailable {
+    public void seeInterestedFlights() throws NoFlightsAvailable{
         try {
             fromColumn.setCellValueFactory(new PropertyValueFactory<>("cityA"));
             toColumn.setCellValueFactory(new PropertyValueFactory<>("cityB"));
             flightDateColumn.setCellValueFactory(new PropertyValueFactory<>("flightDate"));
             flightHourColumn.setCellValueFactory(new PropertyValueFactory<>("flightTime"));
             priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-            int flightsNumber = FlightsService.getFlightsNumber();
-            for (int i = 1; i <= flightsNumber; i++) {
+            int interestedFlightsNumber = FlightsService.getInterestedFlightsNumber();
+            for (int i = 1; i <= interestedFlightsNumber; i++) {
                 Flight flight;
-                flight = FlightsService.returnFlight(i);
-                observableList.add(flight);
+                flight = FlightsService.returnInterestedFlight(i);
+                observableListInterested.add(flight);
             }
-            flightsTable.setItems(observableList);
+            flightsTable.setItems(observableListInterested);
         }catch (NoFlightsAvailable e){
             flightsTable.setVisible(false);
             errorMessage.setText(e.getMessage());

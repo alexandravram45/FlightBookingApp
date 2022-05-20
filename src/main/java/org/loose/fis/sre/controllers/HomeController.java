@@ -10,7 +10,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.loose.fis.sre.exceptions.NoFlightsAvailable;
 import org.loose.fis.sre.services.FlightsService;
 
 
@@ -23,7 +25,7 @@ import java.util.ResourceBundle;
 public class HomeController implements Initializable {
 
     @FXML
-    private Button loginButton, seeAllFlightsButton;
+    private Button loginButton, seeAllFlightsButton, seeAllInterestedButton;
     @FXML
     private TextField cityA, cityB;
     @FXML
@@ -83,9 +85,10 @@ public class HomeController implements Initializable {
     }
 
     @FXML
-    public void seeAllFlights(ActionEvent event) throws Exception {
+    public void seeAllFlights(ActionEvent event) {
         seeAllFlightsButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
+
                 Parent root;
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("flightsList.fxml"));
                 try {
@@ -95,7 +98,12 @@ public class HomeController implements Initializable {
                 }
 
                 SeeAllFlightsController seeAllFlightsController = loader.getController();
-                seeAllFlightsController.seeAllFlights();
+
+                try {
+                    seeAllFlightsController.seeAllFlights();
+                } catch (NoFlightsAvailable e) {
+                    throw new RuntimeException(e);
+                }
 
                 Stage stage = new Stage();
                 stage.setTitle("All flights available");
@@ -104,6 +112,34 @@ public class HomeController implements Initializable {
             }
         });
     }
+
+    @FXML
+    public void seeAllInterestedFlights(ActionEvent event) throws Exception {
+        seeAllInterestedButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                Parent root;
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("interestedFlightsList.fxml"));
+                try {
+                    root = loader.load();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                SeeInterestedFlightsController seeInterestedFlightsController = loader.getController();
+                try {
+                    seeInterestedFlightsController.seeInterestedFlights();
+                } catch (NoFlightsAvailable e) {
+                    throw new RuntimeException(e);
+                }
+
+                Stage stage = new Stage();
+                stage.setTitle("Interested list");
+                stage.setScene(new Scene(root, 1000, 600));
+                stage.show();
+            }
+        });
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
