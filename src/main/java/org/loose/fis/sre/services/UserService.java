@@ -43,7 +43,7 @@ public class UserService {
                 throw new NotAnAdminException(username, role);
             }
         }
-
+    private static void checkLoginInfo(String username, String password, String role ) throws
 
     private static String encodePassword(String salt, String password) {
         MessageDigest md = getMessageDigest();

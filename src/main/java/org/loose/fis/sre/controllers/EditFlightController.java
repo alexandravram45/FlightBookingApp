@@ -18,7 +18,7 @@ public class EditFlightController {
 
     @FXML
 
-    private TextField oldDate, newDate; //am schimbat aici in texfield, schimba si in fxml
+    private TextField oldDate, newDate; //am schimbat aici in texfield, schimba si in fxml ok pwp
 
     @FXML
 
