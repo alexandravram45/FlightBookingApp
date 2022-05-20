@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -29,6 +30,12 @@ public class RegistrationController {
     @FXML
     private TextField usernameField;
     @FXML
+    private TextField nameField;
+    @FXML
+    private TextField emailField;
+    @FXML
+    private TextField numberField;
+    @FXML
     private ChoiceBox role;
     private String userRole;
 
@@ -40,38 +47,25 @@ public class RegistrationController {
     @FXML
     public void handleRegisterAction(ActionEvent event) {
         try {
-            UserService.addUser(usernameField.getText(), passwordField.getText(), (String) role.getValue());
+            UserService.addUser(usernameField.getText(), passwordField.getText(), (String) role.getValue(), nameField.getText(), emailField.getText(), numberField.getText());
             registrationMessage.setText("Account created successfully!");
             userRole = (String) role.getValue();
-            if (userRole.equals("Admin")){
-                whoIsLoggedIn.setLoggedUsername(usernameField.getText());
-                Parent root;
-                try {
-                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("adminChoices.fxml")));
-                    Stage stage = new Stage();
-                    stage.setTitle("Choose options");
-                    stage.setScene(new Scene(root, 600, 400));
-                    stage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }else if (userRole.equals("Customer")){
-                whoIsLoggedIn.setLoggedUsername(usernameField.getText());
-                Parent root;
-                try {
-                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("home.fxml")));
-                    Stage stage = new Stage();
-                    stage.setTitle("Home page");
-                    stage.setScene(new Scene(root, 1000, 600));
-                    stage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        } catch (UsernameAlreadyExistsException e) {
-            registrationMessage.setText(e.getMessage());
-        } catch (NotAnAdminException e){
-            registrationMessage.setText(e.getMessage());
+
+        } catch (UsernameAlreadyExistsException e1) {
+            registrationMessage.setText(e1.getMessage());
+        } catch (invalidAdminEmailException e2) {
+            registrationMessage.setText(e2.getMessage());
+        } catch (invalidCustomerEmailException e3) {
+            registrationMessage.setText(e3.getMessage());
         }
+
+    }
+
+    public void goToLogin(javafx.event.ActionEvent login) throws Exception{
+        Parent root1=FXMLLoader.load(getClass().getClassLoader().getResource("login.fxml"));
+        Stage window = (Stage)((Node)login.getSource()).getScene().getWindow();
+        window.setTitle("Login");
+        window.setScene(new Scene(root1,600,460));
+        window.show();
     }
 }
