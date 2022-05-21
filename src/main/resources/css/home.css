@@ -22,13 +22,18 @@
     -fx-text-fill: white;
 }
 
-#title {
+#title, #flightTitle {
     -fx-font-size: 27px;
     -fx-text-fill: #000000;
-    -fx-font-weight: 700;
+    -fx-font-style: italic;
+
 }
 
 #login{
     -fx-background-color:  #134074;
     -fx-text-fill: white;
+}
+
+#reviews:hover{
+    -fx-background-color:  #809fff;
 }

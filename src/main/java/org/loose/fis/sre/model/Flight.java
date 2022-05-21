@@ -6,6 +6,8 @@ public class Flight {
     private int flightTime;
     private int price;
 
+    private int capacity = 0;
+
     public Flight(){}
     public Flight(String cityA, String cityB, String flightDate, int flightTime, int price){
         this.cityA = cityA;
@@ -53,5 +55,13 @@ public class Flight {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public int getCapacity() {
+        return capacity;
     }
 }

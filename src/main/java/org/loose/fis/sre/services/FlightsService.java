@@ -4,6 +4,7 @@ import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.objects.ObjectRepository;
 import org.loose.fis.sre.exceptions.FlightAlreadyExistsException;
 import org.loose.fis.sre.exceptions.FlightDoesNotExistException;
+import org.loose.fis.sre.exceptions.FlightIsFullException;
 import org.loose.fis.sre.exceptions.NoFlightsAvailable;
 import org.loose.fis.sre.model.Flight;
 
@@ -63,13 +64,6 @@ public class FlightsService {
             if (Objects.equals(cityA, flight.getCityA()) && Objects.equals(cityB, flight.getCityB()))
                 flightRepository.remove(flight);
             throw new FlightDoesNotExistException(cityA, cityB, flight.getFlightDate());
-        }
-    }
-
-    public static void deleteFlightFromInterested(String cityA, String cityB) {
-        for (Flight flight : interestedRepository.find()) {
-            if (Objects.equals(cityA, flight.getCityA()) && Objects.equals(cityB, flight.getCityB()))
-                interestedRepository.remove(flight);
         }
     }
 

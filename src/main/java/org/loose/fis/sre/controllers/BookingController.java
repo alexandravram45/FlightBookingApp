@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import org.loose.fis.sre.exceptions.FlightDoesNotExistException;
+import org.loose.fis.sre.exceptions.FlightIsFullException;
 import org.loose.fis.sre.exceptions.WrongEmailFormatException;
 import org.loose.fis.sre.exceptions.WrongPhoneNumberFormatException;
 import org.loose.fis.sre.model.Flight;
@@ -17,7 +18,6 @@ import java.lang.reflect.Field;
 public class BookingController {
     @FXML
     private TextField firstName, lastName, tel, address, email;
-
     @FXML
     private Label cityA, cityB, flightDate, flightHour, price;
     @FXML
@@ -30,6 +30,10 @@ public class BookingController {
         } catch (WrongEmailFormatException e) {
             bookingMessage.setText(e.getMessage());
         } catch (WrongPhoneNumberFormatException e) {
+            bookingMessage.setText(e.getMessage());
+        } catch (FlightDoesNotExistException e) {
+            bookingMessage.setText(e.getMessage());
+        } catch (FlightIsFullException e) {
             bookingMessage.setText(e.getMessage());
         }
     }

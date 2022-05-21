@@ -15,8 +15,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.loose.fis.sre.exceptions.FlightDoesNotExistException;
 import org.loose.fis.sre.model.Flight;
+import org.loose.fis.sre.model.Review;
 import org.loose.fis.sre.services.FlightsService;
 import org.loose.fis.sre.controllers.HomeController;
+import org.loose.fis.sre.services.ReviewsService;
 
 import java.io.IOException;
 import java.net.URL;
@@ -35,21 +37,24 @@ public class FlightsController implements Initializable {
     private Text interestedText;
     @FXML
     private Button bookButton;
+    @FXML
+    private Label personName;
+    @FXML
+    private Text personReview;
+    @FXML
+    private Pane reviewPane;
 
     @FXML
-    public void initialize() {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         cityA.setText(" ");
         cityB.setText(" ");
         takeOffDate.setText(" ");
         takeOffHour.setText(" ");
         price.setText(" ");
+        reviewPane.setVisible(false);
     }
 
     public FlightsController(){
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
     }
 
     public void handleSearch(String cityA2, String cityB2, String takeOffDate2){
@@ -103,6 +108,12 @@ public class FlightsController implements Initializable {
             }
         });
     }
+    @FXML
     public void showReviews(ActionEvent event) {
+        reviewPane.setVisible(true);
+        personReview.setWrappingWidth(590);
+        Review review = ReviewsService.addReviews(cityB.getText());
+        personReview.setText(review.getReviewText());
+        personName.setText(review.getPersonName());
     }
 }
