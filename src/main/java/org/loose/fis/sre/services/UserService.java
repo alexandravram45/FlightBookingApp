@@ -2,10 +2,7 @@ package org.loose.fis.sre.services;
 
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.objects.ObjectRepository;
-import org.loose.fis.sre.exceptions.NotAnAdminException;
-import org.loose.fis.sre.exceptions.UsernameAlreadyExistsException;
-import org.loose.fis.sre.exceptions.UsernameDoesNotExistException;
-import org.loose.fis.sre.exceptions.WrongPasswordException;
+import org.loose.fis.sre.exceptions.*;
 import org.loose.fis.sre.model.User;
 
 import java.nio.charset.StandardCharsets;
@@ -45,7 +42,7 @@ public class UserService {
                 throw new NotAnAdminException(username, role);
             }
         }
-    private static void checkLoginInfo(String username, String password, String role ) throws UsernameDoesNotExistException, WrongPasswordException{
+    public static void checkLoginInfo(String username, String password, String role ) throws UsernameDoesNotExistException, WrongPasswordException, EmptyUsernameFieldException, EmptyPasswordFieldException {
         int userok=0, passok=0;
         for (User user : userRepository.find()){
             if(Objects.equals(username, user.getUsername())){
