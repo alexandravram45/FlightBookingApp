@@ -39,6 +39,7 @@
    <Label layoutX="199.0" layoutY="95.0" text="Email:" GridPane.rowIndex="3" />
    <TextField fx:id="usernameField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
    <TextField fx:id="emailFiled" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+   <Button mnemonicParsing="false" onAction="#goToLogin" text="Go to login" GridPane.rowIndex="7" />
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints />

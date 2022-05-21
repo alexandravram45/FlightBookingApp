@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import org.loose.fis.sre.exceptions.EmptyPasswordFieldException;
 import org.loose.fis.sre.exceptions.EmptyUsernameFieldException;
 import org.loose.fis.sre.exceptions.UsernameDoesNotExistException;
+import org.loose.fis.sre.exceptions.WrongPasswordException;
 import org.loose.fis.sre.services.UserService;
 
 public class loginController {
@@ -61,10 +62,12 @@ public class loginController {
             }
         } catch (UsernameDoesNotExistException e) {
             loginMessage.setText(e.getMessage());
-        } catch (EmptyUsernameFieldException e1) {
-            loginMessage.setText(e1.getMessage());
-        } catch (EmptyPasswordFieldException e2) {
-            loginMessage.setText(e2.getMessage());
+        } catch (EmptyUsernameFieldException e) {
+            loginMessage.setText(e.getMessage());
+        } catch (EmptyPasswordFieldException e) {
+            loginMessage.setText(e.getMessage());
+        }catch (WrongPasswordException e) {
+            loginMessage.setText(e.getMessage());
         }
     }
     public void goBackToRegisterScene(javafx.event.ActionEvent login) throws Exception {
@@ -72,7 +75,7 @@ public class loginController {
         Stage window = (Stage) ((Node) login.getSource()).getScene().getWindow();
         ;
         window.setTitle("Register");
-        window.setScene(new Scene(root1, 600, 460));
+        window.setScene(new Scene(root1, 600, 400));
         window.show();
     }
 }

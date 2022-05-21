@@ -44,6 +44,10 @@ public class UserService {
         }
     public static void checkLoginInfo(String username, String password, String role ) throws UsernameDoesNotExistException, WrongPasswordException, EmptyUsernameFieldException, EmptyPasswordFieldException {
         int userok=0, passok=0;
+        if (username == "")
+            throw new EmptyUsernameFieldException();
+        if (password == "")
+            throw new EmptyPasswordFieldException();
         for (User user : userRepository.find()){
             if(Objects.equals(username, user.getUsername())){
                 userok =1;
@@ -54,7 +58,7 @@ public class UserService {
         }
         if (userok==0)
             throw new UsernameDoesNotExistException(username);
-        if (passok==1)
+        if (passok==0)
             throw new WrongPasswordException();
     }
 

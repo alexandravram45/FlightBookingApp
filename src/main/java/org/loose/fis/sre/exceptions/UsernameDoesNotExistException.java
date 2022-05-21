@@ -9,6 +9,7 @@ public class UsernameDoesNotExistException extends Exception{
         this.username=username;
     }
     public String getUsername(){
+
         return username;
     }
 }
