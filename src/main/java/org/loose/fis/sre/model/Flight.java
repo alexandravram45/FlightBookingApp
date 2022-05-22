@@ -1,35 +1,24 @@
 package org.loose.fis.sre.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Flight {
-
-    private int flightId;
     private String cityA, cityB;
-    private Date takeOffDate;
+    private Date flightDate;
     private Date takeOffBackDate;
-    private int takeOffHour, takeOffMinutes;
+    private int flightTime;
     private int price;
 
     public Flight(){
     }
 
-    public Flight(int flightId, String cityA, String cityB, Date takeOffDate, Date takeOffBackDate, int takeOffHour, int takeOffMinutes, int price){
-        this.flightId = flightId;
+    public Flight(String cityA, String cityB, Date flightDate, Date takeOffBackDate, int flightTime, int price){
         this.cityA = cityA;
         this.cityB = cityB;
-        this.takeOffDate = takeOffDate;
+        this.flightDate = flightDate;
         this.takeOffBackDate = takeOffBackDate;
-        this.takeOffHour = takeOffHour;
-        this.takeOffMinutes = takeOffMinutes;
+        this.flightTime = flightTime;
         this.price = price;
-    }
-    public int getFlightId() {
-        return flightId;
-    }
-
-    public void setFlightId(int flightId) {
-        this.flightId = flightId;
     }
 
     public String getCityA() {
@@ -48,28 +37,20 @@ public class Flight {
         this.cityB = cityB;
     }
 
-    public int getTakeOffHour() {
-        return takeOffHour;
+    public int getFlightTime() {
+        return flightTime;
     }
 
-    public void setTakeOffHour(int takeOffHour) {
-        this.takeOffHour = takeOffHour;
+    public void setFlightTime(int flightTime) {
+        this.flightTime = flightTime;
     }
 
-    public int getTakeOffMinutes() {
-        return takeOffMinutes;
+    public Date getFlightDate() {
+        return flightDate;
     }
 
-    public void setTakeOffMinutes(int takeOffMinutes) {
-        this.takeOffMinutes = takeOffMinutes;
-    }
-
-    public Date getTakeOffDate() {
-        return takeOffDate;
-    }
-
-    public void setTakeOffDate(Date takeOffDate) {
-        this.takeOffDate = takeOffDate;
+    public void setFlightDate(Date flightDate) {
+        this.flightDate = flightDate;
     }
 
     public Date getTakeOffBackDate() {

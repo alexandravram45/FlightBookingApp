@@ -26,7 +26,7 @@ public class HomeController implements Initializable {
     @FXML
     private TextField cityA, cityB;
     @FXML
-    private DatePicker takeOffDate, takeOffBackDate;
+    private DatePicker takeOffDate;
     @FXML
     private Button searchButton;
 
@@ -70,7 +70,7 @@ public class HomeController implements Initializable {
             }
         });
             FlightsController c = new FlightsController();
-            c.handleSearch(cityA.getText(), cityB.getText(), takeOffDate.getValue(), takeOffBackDate.getValue());
+            c.handleSearch(cityA.getText(), cityB.getText(), takeOffDate.getValue());
             //cityA_static.setText(cityA.getText());
             System.out.println(cityA.getText());
 
