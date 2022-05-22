@@ -2,9 +2,12 @@ package org.loose.fis.sre.services;
 
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.objects.ObjectRepository;
+import org.loose.fis.sre.exceptions.FlightDoesNotExistException;
+import org.loose.fis.sre.exceptions.FlightIsFullException;
 import org.loose.fis.sre.exceptions.WrongEmailFormatException;
 import org.loose.fis.sre.exceptions.WrongPhoneNumberFormatException;
 import org.loose.fis.sre.model.Booking;
+import org.loose.fis.sre.model.Flight;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,10 +25,17 @@ public class BookingService {
         bookingRepository = database.getRepository(Booking.class);
     }
 
-    public static void addBooking(String firstName, String lastName, String tel, String address, String email) throws WrongPhoneNumberFormatException, WrongEmailFormatException{
+    public static void addBooking(String firstName, String lastName, String tel, String address, String email, String cityA, String cityB, String flightDate, int flightHour, int price) throws WrongPhoneNumberFormatException, WrongEmailFormatException, FlightDoesNotExistException, FlightIsFullException {
         checkEmailFormat(email);
         checkTelFormat(tel);
-        bookingRepository.insert(new Booking(firstName, lastName, tel, address, email));
+        checkFlightCapacity(FlightsService.searchFlight(cityA, cityB, flightDate));
+        bookingRepository.insert(new Booking(firstName, lastName, tel, address, email, cityA, cityB, flightDate, flightHour, price));
+    }
+
+    public static void checkFlightCapacity(Flight flight) throws FlightIsFullException {
+        if (flight.getCapacity() > 100){
+            throw new FlightIsFullException();
+        }
     }
 
     private static void checkTelFormat(String tel) throws WrongPhoneNumberFormatException{

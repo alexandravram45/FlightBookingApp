@@ -1,24 +1,29 @@
 package org.loose.fis.sre.model;
 
-import java.sql.Date;
+import org.dizitart.no2.objects.Id;
 
 public class Flight {
+
+    @Id
+    private int id;
+    private static int currentid = 0;
+
     private String cityA, cityB;
-    private Date flightDate;
-    private Date takeOffBackDate;
+    private String flightDate;
     private int flightTime;
     private int price;
 
-    public Flight(){
-    }
+    private int capacity = 0;
 
-    public Flight(String cityA, String cityB, Date flightDate, Date takeOffBackDate, int flightTime, int price){
+    public Flight(){}
+    public Flight(String cityA, String cityB, String flightDate, int flightTime, int price){
         this.cityA = cityA;
         this.cityB = cityB;
         this.flightDate = flightDate;
-        this.takeOffBackDate = takeOffBackDate;
         this.flightTime = flightTime;
         this.price = price;
+        currentid++;
+        this.id = currentid;
     }
 
     public String getCityA() {
@@ -45,20 +50,12 @@ public class Flight {
         this.flightTime = flightTime;
     }
 
-    public Date getFlightDate() {
+    public String getFlightDate() {
         return flightDate;
     }
 
-    public void setFlightDate(Date flightDate) {
+    public void setFlightDate(String flightDate) {
         this.flightDate = flightDate;
-    }
-
-    public Date getTakeOffBackDate() {
-        return takeOffBackDate;
-    }
-
-    public void setTakeOffBackDate(Date takeOffBackDate) {
-        this.takeOffBackDate = takeOffBackDate;
     }
 
     public int getPrice() {
@@ -67,5 +64,21 @@ public class Flight {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public static void setCurrentid(int currentid) {
+        Flight.currentid = currentid;
     }
 }

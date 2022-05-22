@@ -2,8 +2,7 @@ package org.loose.fis.sre.services;
 
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.objects.ObjectRepository;
-import org.loose.fis.sre.exceptions.NotAnAdminException;
-import org.loose.fis.sre.exceptions.UsernameAlreadyExistsException;
+import org.loose.fis.sre.exceptions.*;
 import org.loose.fis.sre.model.User;
 
 import java.nio.charset.StandardCharsets;
@@ -25,7 +24,7 @@ public class UserService {
         userRepository = database.getRepository(User.class);
     }
 
-    public static void addUser(String username, String password, String role) throws UsernameAlreadyExistsException, NotAnAdminException {
+    public static void addUser(String username, String password, String role, String name, String email) throws UsernameAlreadyExistsException, NotAnAdminException {
         checkUserDoesNotAlreadyExist(username);
         checkUserIsNotAnAdmin(username, role);
         userRepository.insert(new User(username, encodePassword(username, password), role));
@@ -43,7 +42,25 @@ public class UserService {
                 throw new NotAnAdminException(username, role);
             }
         }
-
+    public static void checkLoginInfo(String username, String password, String role ) throws UsernameDoesNotExistException, WrongPasswordException, EmptyUsernameFieldException, EmptyPasswordFieldException {
+        int userok=0, passok=0;
+        if (username == "")
+            throw new EmptyUsernameFieldException();
+        if (password == "")
+            throw new EmptyPasswordFieldException();
+        for (User user : userRepository.find()){
+            if(Objects.equals(username, user.getUsername())){
+                userok =1;
+                if(Objects.equals(encodePassword(username, password), user.getPassword())){
+                    passok=1;
+                }
+            }
+        }
+        if (userok==0)
+            throw new UsernameDoesNotExistException(username);
+        if (passok==0)
+            throw new WrongPasswordException();
+    }
 
     private static String encodePassword(String salt, String password) {
         MessageDigest md = getMessageDigest();
