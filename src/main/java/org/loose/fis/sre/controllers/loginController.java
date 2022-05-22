@@ -73,7 +73,6 @@ public class loginController {
     public void goBackToRegisterScene(javafx.event.ActionEvent register) throws Exception {
         Parent root1 = FXMLLoader.load(getClass().getClassLoader().getResource("register.fxml"));
         Stage window = (Stage) ((Node) register.getSource()).getScene().getWindow();
-        ;
         window.setTitle("Register");
         window.setScene(new Scene(root1, 600, 400));
         window.show();
