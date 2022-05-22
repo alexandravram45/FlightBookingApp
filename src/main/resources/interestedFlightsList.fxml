@@ -3,33 +3,26 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #eff7ff;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.loose.fis.sre.controllers.SeeAllFlightsController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #eff7ff;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.loose.fis.sre.controllers.SeeInterestedFlightsController">
    <children>
       <TableView fx:id="flightsTable" layoutX="125.0" layoutY="119.0" prefHeight="361.0" prefWidth="750.0">
-        <columns>
-          <TableColumn fx:id="fromColumn" prefWidth="150.0" text="FROM" />
-          <TableColumn fx:id="toColumn" prefWidth="150.0" text="TO" />
+         <columns>
+            <TableColumn fx:id="fromColumn" prefWidth="150.0" text="FROM" />
+            <TableColumn fx:id="toColumn" prefWidth="150.0" text="TO" />
             <TableColumn fx:id="flightDateColumn" prefWidth="150.0" text="FLIGHT DATE" />
             <TableColumn fx:id="flightHourColumn" prefWidth="150.0" text="FLIGHT HOUR" />
             <TableColumn fx:id="priceColumn" prefWidth="150.0" text="PRICE" />
-        </columns>
+         </columns>
       </TableView>
-      <Label layoutX="125.0" layoutY="65.0" text="All flights available">
+      <Label layoutX="125.0" layoutY="55.0" text="Interested List">
          <font>
             <Font name="Georgia Bold Italic" size="23.0" />
          </font>
       </Label>
       <Text fx:id="errorMessage" layoutX="125.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <ImageView fitHeight="99.0" fitWidth="99.0" layoutX="451.0" layoutY="19.0">
-         <image>
-            <Image url="@images/flight.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>
