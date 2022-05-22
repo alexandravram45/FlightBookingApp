@@ -3,21 +3,29 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.loose.fis.sre.controllers.BookingController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="500.0" style="-fx-background-color: #eff7ff;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.loose.fis.sre.controllers.BookingController">
    <children>
-      <Label layoutX="81.0" layoutY="60.0" text="Rezerva un zbor">
+      <ImageView fitHeight="700.0" fitWidth="509.0" layoutX="-8.0" opacity="0.64">
+         <image>
+            <Image url="@images/model.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="81.0" layoutY="60.0" text="Book a flight">
          <font>
             <Font name="Georgia Bold Italic" size="18.0" />
          </font>
       </Label>
-      <GridPane layoutX="61.0" layoutY="100.0" prefHeight="348.0" prefWidth="358.0">
+      <GridPane layoutX="80.0" layoutY="235.0" prefHeight="315.0" prefWidth="340.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -34,19 +42,48 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Nume" />
-            <Label text="Prenume" GridPane.rowIndex="2" />
+            <Label text="First Name" />
+            <Label text="Last Name" GridPane.rowIndex="2" />
             <TextField fx:id="firstName" GridPane.rowIndex="1" />
             <TextField fx:id="lastName" GridPane.rowIndex="3" />
             <TextField fx:id="tel" GridPane.rowIndex="5" />
             <TextField fx:id="address" GridPane.rowIndex="7" />
             <TextField fx:id="email" GridPane.rowIndex="9" />
-            <Label text="Adresa completa" GridPane.rowIndex="6" />
+            <Label text="Address" GridPane.rowIndex="6" />
             <Label text="e-mail" GridPane.rowIndex="8" />
-            <Label text="Numar de telefon" GridPane.rowIndex="4" />
+            <Label text="Phone number" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Button layoutX="396.0" layoutY="737.0" mnemonicParsing="false" onAction="#handleBookingAction" prefHeight="50.0" prefWidth="90.0" text="Rezerva" />
-      <Text fx:id="bookingMessage" layoutX="70.0" layoutY="501.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Button layoutX="395.0" layoutY="635.0" mnemonicParsing="false" onAction="#handleBookingAction" prefHeight="50.0" prefWidth="90.0" stylesheets="@css/home.css" text="Book it!" />
+      <Text fx:id="bookingMessage" layoutX="80.0" layoutY="591.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Label fx:id="cityA" layoutX="81.0" layoutY="103.0" text="Label">
+         <font>
+            <Font name="Georgia Italic" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="flightDate" layoutX="81.0" layoutY="164.0" text="Label">
+         <font>
+            <Font name="Georgia Italic" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="flightHour" layoutX="81.0" layoutY="195.0" text="Label">
+         <font>
+            <Font name="Georgia Italic" size="14.0" />
+         </font>
+      </Label>
+      <Pane fx:id="pricePane" layoutX="298.0" layoutY="114.0" prefHeight="73.0" prefWidth="142.0" style="-fx-background-color: #809fff;">
+         <children>
+            <Label fx:id="price" layoutX="30.0" layoutY="21.0" style="-fx-text-fill: white;" text="Label">
+               <font>
+                  <Font name="Georgia Bold Italic" size="29.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label fx:id="cityB" layoutX="81.0" layoutY="135.0" text="Label">
+         <font>
+            <Font name="Georgia Italic" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
