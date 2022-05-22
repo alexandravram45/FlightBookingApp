@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -43,6 +44,8 @@ public class FlightsController implements Initializable {
     private Text personReview;
     @FXML
     private Pane reviewPane;
+    @FXML
+    private ImageView logo;
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -52,6 +55,7 @@ public class FlightsController implements Initializable {
         takeOffHour.setText(" ");
         price.setText(" ");
         reviewPane.setVisible(false);
+        logo.setVisible(false);
     }
 
     public FlightsController(){
@@ -111,6 +115,7 @@ public class FlightsController implements Initializable {
     @FXML
     public void showReviews(ActionEvent event) {
         reviewPane.setVisible(true);
+        logo.setVisible(true);
         personReview.setWrappingWidth(590);
         Review review = ReviewsService.addReviews(cityB.getText());
         personReview.setText(review.getReviewText());

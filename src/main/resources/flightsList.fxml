@@ -3,6 +3,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -18,11 +20,16 @@
             <TableColumn fx:id="priceColumn" prefWidth="150.0" text="PRICE" />
         </columns>
       </TableView>
-      <Label layoutX="125.0" layoutY="55.0" text="All flights available">
+      <Label layoutX="125.0" layoutY="65.0" text="All flights available">
          <font>
             <Font name="Georgia Bold Italic" size="23.0" />
          </font>
       </Label>
       <Text fx:id="errorMessage" layoutX="125.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <ImageView fitHeight="99.0" fitWidth="99.0" layoutX="451.0" layoutY="19.0">
+         <image>
+            <Image url="@images/flight.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
