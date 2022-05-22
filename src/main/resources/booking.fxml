@@ -25,7 +25,7 @@
             <Font name="Georgia Bold Italic" size="18.0" />
          </font>
       </Label>
-      <GridPane layoutX="80.0" layoutY="235.0" prefHeight="358.0" prefWidth="349.0">
+      <GridPane layoutX="80.0" layoutY="235.0" prefHeight="315.0" prefWidth="340.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -55,7 +55,7 @@
          </children>
       </GridPane>
       <Button layoutX="395.0" layoutY="635.0" mnemonicParsing="false" onAction="#handleBookingAction" prefHeight="50.0" prefWidth="90.0" stylesheets="@css/home.css" text="Book it!" />
-      <Text fx:id="bookingMessage" layoutX="70.0" layoutY="501.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="bookingMessage" layoutX="80.0" layoutY="591.0" strokeType="OUTSIDE" strokeWidth="0.0" />
       <Label fx:id="cityA" layoutX="81.0" layoutY="103.0" text="Label">
          <font>
             <Font name="Georgia Italic" size="14.0" />

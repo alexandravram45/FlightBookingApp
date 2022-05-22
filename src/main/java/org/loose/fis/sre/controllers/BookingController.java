@@ -24,9 +24,10 @@ public class BookingController {
     private Text bookingMessage;
     @FXML
     public void handleBookingAction(){
+        bookingMessage.setWrappingWidth(400);
         try {
             BookingService.addBooking(firstName.getText(), lastName.getText(), tel.getText(), address.getText(), email.getText(), cityA.getText(), cityB.getText(), flightDate.getText(), Integer.parseInt(flightHour.getText()), Integer.parseInt(price.getText()));
-            bookingMessage.setText("Booking made successfully! Thank You!");
+            bookingMessage.setText("Booking made successfully! We will send you an e-mail with booking details and payment steps");
         } catch (WrongEmailFormatException e) {
             bookingMessage.setText(e.getMessage());
         } catch (WrongPhoneNumberFormatException e) {
