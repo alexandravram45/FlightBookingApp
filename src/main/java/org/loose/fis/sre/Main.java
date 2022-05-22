@@ -23,7 +23,7 @@ public class Main extends Application {
         FlightsService.initDatabase();
         FlightsService.initDatabaseInterested();
         BookingService.initDatabase();
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("adminChoices.fxml"));
         primaryStage.setTitle("Flight Booking App");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
