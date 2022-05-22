@@ -19,6 +19,7 @@ import org.loose.fis.sre.services.FlightsService;
 import org.loose.fis.sre.services.UserService;
 
 import static java.sql.Date.valueOf;
+import static org.loose.fis.sre.services.FlightsService.flightRepository;
 
 public class AddFlightController {
 
@@ -40,17 +41,28 @@ public class AddFlightController {
     @FXML
     public void addFlightButton() {
         try {
-            FlightsService.addFlight(cityA.getText(), cityB.getText(), takeOffDate.getText(), Integer.parseInt(price.getText()), Integer.parseInt(time.getText()));
+            setId();
+            FlightsService.addFlight(cityA.getText(), cityB.getText(), takeOffDate.getText(), Integer.parseInt(time.getText()), Integer.parseInt(price.getText()));
             addingMessage.setText("The flight has been added successfully");
         } catch (FlightAlreadyExistsException e) {
             addingMessage.setText(e.getMessage());
         }
     }
-    public void goBackButton(javafx.event.ActionEvent back) throws Exception{
-        Parent root1= FXMLLoader.load(getClass().getClassLoader().getResource("adminChoices.fxml"));
-        Stage window = (Stage)((Node)back.getSource()).getScene().getWindow();
+
+    private void setId() {
+        int max = 0;
+        for (Flight flight : flightRepository.find()) {
+            if (flight.getId() > max)
+                max = flight.getId();
+        }
+        Flight.setCurrentid(max);
+    }
+
+    public void goBackButton(javafx.event.ActionEvent back) throws Exception {
+        Parent root1 = FXMLLoader.load(getClass().getClassLoader().getResource("adminChoices.fxml"));
+        Stage window = (Stage) ((Node) back.getSource()).getScene().getWindow();
         window.setTitle("Admin");
-        window.setScene(new Scene(root1,600,460));
+        window.setScene(new Scene(root1, 600, 460));
         window.show();
     }
 }

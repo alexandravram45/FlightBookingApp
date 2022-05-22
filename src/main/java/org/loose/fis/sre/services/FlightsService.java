@@ -14,7 +14,7 @@ import java.util.Objects;
 import static org.loose.fis.sre.services.FileSystemService.getPathToFile;
 
 public class FlightsService {
-    private static ObjectRepository<Flight> flightRepository;
+    public static ObjectRepository<Flight> flightRepository;
 
     public static ObjectRepository<Flight> getFlightRepository() {
         return flightRepository;
@@ -60,22 +60,32 @@ public class FlightsService {
     }
 
     public static void deleteFlight(String cityA, String cityB) throws FlightDoesNotExistException{
-        for (Flight flight : flightRepository.find()) {
-            if (Objects.equals(cityA, flight.getCityA()) && Objects.equals(cityB, flight.getCityB()))
-                flightRepository.remove(flight);
-            throw new FlightDoesNotExistException(cityA, cityB, flight.getFlightDate());
+        Flight flight = new Flight();
+        for (Flight currentflight : flightRepository.find()) {
+            flight = currentflight;
+            if (cityA.equals(currentflight.getCityA()) && cityB.equals(currentflight.getCityB()))
+                break;
         }
+        if (cityA.equals(flight.getCityA()) && cityB.equals(flight.getCityB()))
+            flightRepository.remove(flight);
+        else
+            throw new FlightDoesNotExistException(cityA, cityB, flight.getFlightDate());
     }
 
      public static void editFlight(String cityA, String cityB, String oldDate, String newDate, int oldTime, int newTime) throws FlightDoesNotExistException {
-         for (Flight flight : flightRepository.find()) {
-             if (Objects.equals(cityA, flight.getCityA()) && Objects.equals(cityB, flight.getCityB())){
-                 flightRepository.remove(flight);
-                 Flight newFlight = new Flight(cityA, cityB, newDate, newTime, flight.getPrice());
-                 flightRepository.insert(newFlight);
-             }
-             throw new FlightDoesNotExistException(cityA, cityB, flight.getFlightDate());
+         Flight flight = new Flight();
+         for (Flight currentflight : flightRepository.find()) {
+             flight = currentflight;
+             if (cityA.equals(currentflight.getCityA()) && cityB.equals(currentflight.getCityB()))
+                 break;
          }
+         if (cityA.equals(flight.getCityA()) && cityB.equals(flight.getCityB())) {
+             flightRepository.remove(flight);
+             Flight newFlight = new Flight(cityA, cityB, newDate, newTime, flight.getPrice());
+             flightRepository.insert(newFlight);
+         }
+         else
+             throw new FlightDoesNotExistException(cityA, cityB, flight.getFlightDate());
      }
 
     public static Flight searchFlight(String cityA, String cityB, String flightDate) throws FlightDoesNotExistException {

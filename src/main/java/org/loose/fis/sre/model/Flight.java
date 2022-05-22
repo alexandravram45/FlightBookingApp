@@ -1,6 +1,13 @@
 package org.loose.fis.sre.model;
 
+import org.dizitart.no2.objects.Id;
+
 public class Flight {
+
+    @Id
+    private int id;
+    private static int currentid = 0;
+
     private String cityA, cityB;
     private String flightDate;
     private int flightTime;
@@ -15,6 +22,8 @@ public class Flight {
         this.flightDate = flightDate;
         this.flightTime = flightTime;
         this.price = price;
+        currentid++;
+        this.id = currentid;
     }
 
     public String getCityA() {
@@ -63,5 +72,13 @@ public class Flight {
 
     public int getCapacity() {
         return capacity;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public static void setCurrentid(int currentid) {
+        Flight.currentid = currentid;
     }
 }
