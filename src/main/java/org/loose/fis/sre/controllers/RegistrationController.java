@@ -63,4 +63,5 @@ public class RegistrationController {
         window.setScene(new Scene(root1,600,460));
         window.show();
     }
+
 }
