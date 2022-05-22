@@ -56,7 +56,7 @@ public class loginController {
                 Stage window = (Stage) ((Node) login.getSource()).getScene().getWindow();
                 ;
                 window.setTitle("Home");
-                window.setScene(new Scene(root3, 600, 400));
+                window.setScene(new Scene(root3, 1000, 600));
                 window.show();
 
             }

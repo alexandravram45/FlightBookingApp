@@ -51,7 +51,7 @@ public class UserService {
         for (User user : userRepository.find()){
             if(Objects.equals(username, user.getUsername())){
                 userok =1;
-                if(Objects.equals(password, user.getPassword())){
+                if(Objects.equals(encodePassword(username, password), user.getPassword())){
                     passok=1;
                 }
             }
